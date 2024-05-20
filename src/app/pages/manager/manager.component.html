@@ -1,0 +1,53 @@
+<button [routerLink]="['/admin/add']"
+  class="bg-transparent hover:bg-blue-500 mb-5 float-right text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded"
+>
+  ADD
+</button>
+<div class="relative overflow-x-auto">
+  <table
+    class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
+  >
+    <thead
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+    >
+      <tr>
+        <th scope="col" class="px-6 py-3">Title</th>
+        <th scope="col" class="px-6 py-3">Desc</th>
+        <th scope="col" class="px-6 py-3">Price</th>
+        <th scope="col" class="px-6 py-3">Image</th>
+        <th scope="col" class="px-6 py-3">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (item of products; track $index) {
+      <tr class="bg-white dark:bg-gray-800">
+        <th
+          scope="row"
+          class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white cursor-pointer"
+          [routerLink]="['/product', item.id]"
+        >
+          {{ item.title }}
+        </th>
+        <td class="px-6 py-4">{{ item.desc }}</td>
+        <td class="px-6 py-4">{{ item.price }}</td>
+        <td class="px-6 py-4"><img [src]="item.image" width="50" alt="" /></td>
+        <td class="px-6 py-4">
+          <button
+            [routerLink]="['/admin/update', item.id]"
+            routerLinkActive="router-link-active"
+            class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+          >
+            Edit
+          </button>
+          <button
+            (click)="deleteData(item.id!)"
+            class="ml-3 font-medium text-red-600 dark:text-red-500 hover:underline"
+          >
+            Delete
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+</div>
